@@ -39,12 +39,33 @@ const removeNote = (title) => {
 
   console.log(chalk.bgGreen("successfully removed note"));
   saveNotes(notes);
+};
 
-  // const newNotes = notes.filter((note) => note?.title != title);
-  // console.log("newNotes", newNotes);
-  // // if (!newNotes.length) {
-  // console.log("successfully removed note");
-  // }
+const listNotes = (title) => {
+  const notes = loadNOtes();
+
+  console.log(chalk.bgGreen("All Notes"));
+
+  notes.map((note, i) => console.log(`${i + 1}) ${note?.title}`));
+};
+
+const readNote = (title) => {
+  const notes = loadNOtes();
+
+  const finededItem = notes.find((note) => note?.title == title);
+  // console.log("findIndex", finededItem);
+
+  if (finededItem) {
+    console.log(chalk.bold("title  -" + finededItem.title));
+    console.log(chalk("description -" + finededItem.body));
+  } else {
+    console.log(chalk.bgRed("this note doesn't exists"));
+  }
+
+  // notes.splice(findIndex, 1);
+  // console.log(chalk.bgGreen("successfully removed note"));
+
+  // saveNotes(notes);
 };
 
 const saveNotes = (notes = []) => {
@@ -66,4 +87,6 @@ module.exports = {
   getNotes: getNotes,
   addNotes: addNotes,
   removeNote: removeNote,
+  listNotes: listNotes,
+  readNote: readNote,
 };
